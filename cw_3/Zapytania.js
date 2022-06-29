@@ -14,7 +14,7 @@ Zad. 4
 MATCH (people:Person)-[ACTED_IN]-(:Movie {title: "The Matrix"}) RETURN people
 
 Zad. 5
-MATCH (a:Movie{name:"The Matrix"})<-[:ACTED_IN]-(a:Person)-[:ACTED_IN]->(m2:Movie) RETURN a, m2
+MATCH (matrix:Movie {title: "The Matrix"})<-[:ACTED_IN]-(actors)-[:ACTED_IN]->(movies) RETURN movies) RETURN a, m2
 
 Zad. 6
 MATCH (actors)-[:ACTED_IN]->(movie:Movie) RETURN actors, count(distinct movie) 
