@@ -1,0 +1,11 @@
+Zad. 5
+MATCH (airport:Airport)<-[r]-(f:Flight)  
+WITH airport, count(r) AS flight_count 
+ORDER flight_count DESC  
+RETURN  airport.name, flight_count
+
+Zad. 6
+MATCH path = (origin:Airport { name:"LAX" })<-[r:ORIGIN|DESTINATION*..5]->(destination:Airport)
+WHERE ALL(f IN [n IN NODES(path) WHERE 'Flight' IN LABELS(n)]
+  WHERE [(f)<-[:ASSIGN]-(ticket) | ticket.price < 3000][0])
+RETURN path

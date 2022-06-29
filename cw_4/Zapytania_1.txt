@@ -1,0 +1,22 @@
+Zad. 1
+MATCH (t:town{name: "Darjeeling"}),
+      (pk:peak{name: "Sandakphu"}),
+      p = shortestPath((t)-[*]-(pk))
+RETURN p
+
+Zad. 2
+MATCH (t:town{name: "Darjeeling"}),
+      (pk:peak{name: "Sandakphu"}),
+      p = shortestPath((t)-[*]-(pk))
+WHERE all(r IN relationships(p) WHERE r.winter = "true")
+RETURN p
+
+Zad. 3
+MATCH (t:town{name: "Darjeeling"}),
+      (pk:peak{name: "Sandakphu"}),
+      p = shortestPath((t)-[*]-(pk))
+WITH p ORDER BY all(r IN relationships(p) ORDER BY r.distance)
+RETURN p
+
+Zad. 4 - brak wyników
+MATCH (t:town{name:'Darjeeling'})-[r:twowheeler*{summer:'true'}]-(place) return distinct(place)
