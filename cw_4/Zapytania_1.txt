@@ -12,11 +12,10 @@ WHERE all(r IN relationships(p) WHERE r.winter = "true")
 RETURN p
 
 Zad. 3
-MATCH (t:town{name: "Darjeeling"}),
-      (pk:peak{name: "Sandakphu"}),
-      p = shortestPath((t)-[*]-(pk))
-WITH p ORDER BY all(r IN relationships(p) ORDER BY r.distance)
-RETURN p
+MATCH p=((dar:town {name: "Darjeeling"})-[path*]->(san:peak {name: "Sandakphu"})) 
+WITH reduce(total_distance = 0, track 
+IN path | total_distance + track.distance) AS distance, p 
+RETURN p ORDER BY distance
 
 Zad. 4 - brak wyników
 MATCH (t:town{name:'Darjeeling'})-[r:twowheeler*{summer:'true'}]-(place) return distinct(place)
